@@ -1,12 +1,12 @@
 {
-  "name": "template",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "template repository using webpack",
+  "description": "simple weather app",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "muhd09afiq",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.24.5",
@@ -26,5 +26,17 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhd09afiq/Weather-App.git"
+  },
+  "keywords": [
+    "weather",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/muhd09afiq/Weather-App/issues"
+  },
+  "homepage": "https://github.com/muhd09afiq/Weather-App#readme"
 }
