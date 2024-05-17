@@ -19,20 +19,20 @@ class WeatherData {
       const weatherData = await rawData.json();
       return weatherData;
     } catch (error) {
-      console.log(error.json());
+      console.error(error);
     }
   }
 
   async showData() {
-    try {
-      const data = await this.getData();
+    const data = await this.getData();
+    //error response {error:, messsage:}
+    if (data.error) {
+      console.error(data);
+    } else {
       console.log(data);
-    } catch (error) {
-      console.log(error);
     }
   }
 }
 
-const data = new WeatherData("fewe");
+const data = new WeatherData("paris");
 data.showData();
-// console.log(data.getData());
