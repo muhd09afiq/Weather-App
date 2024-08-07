@@ -2,6 +2,11 @@ import "./css/reset.css";
 import "./css/style.css";
 
 async function getWeatherData(locationValue) {
+  //remove previous dataDOM
+  if (document.querySelector("p")) {
+    const p = document.querySelector("p");
+    p.remove();
+  }
   //show loading
   const loadingText = document.createElement("p");
   loadingText.textContent = "LOADING DATA";
@@ -14,7 +19,7 @@ async function getWeatherData(locationValue) {
     }
   );
   const weatherData = await rawData.json();
-  console.log(weatherData.current.condition.text);
+
   loadingText.remove();
   showWeatherData(weatherData);
 }
@@ -24,17 +29,13 @@ async function showWeatherData(weatherData) {
   const iconData = await weatherData.current.condition.icon;
   const locationName = await weatherData.location.name;
   const locationTime = await weatherData.location.localtime;
+  const currentTemperature = await weatherData.current.temp_c;
 
-  //remove previous dataDOM
-  if (document.querySelector("p")) {
-    const p = document.querySelector("p");
-    p.remove();
-  }
   const icon = document.createElement("img");
   icon.src = iconData;
 
   const p = document.createElement("p");
-  p.textContent = `Weather in ${locationName} is ${conditionData} at local time of ${locationTime}`;
+  p.textContent = `Weather in ${locationName} is ${conditionData} with a temperature of ${currentTemperature}°C at local time of ${locationTime}`;
   document.body.appendChild(p);
   p.appendChild(icon);
 }
@@ -44,4 +45,5 @@ formSubmit.addEventListener("submit", function (e) {
   e.preventDefault();
   let locationValue = document.querySelector("#location").value;
   getWeatherData(locationValue);
+  document.querySelector("#location").value = "";
 });
