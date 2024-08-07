@@ -1,9 +1,9 @@
 import "./css/reset.css";
 import "./css/style.css";
 
-async function getWeatherData() {
+async function getWeatherData(locationValue) {
   const rawData = await fetch(
-    "https://api.weatherapi.com/v1/current.json?key=5ef8c53bb0564f36ab175755241305&q=kuala_lumpur&aqi=no",
+    `https://api.weatherapi.com/v1/current.json?key=5ef8c53bb0564f36ab175755241305&q=${locationValue}&aqi=no`,
     {
       mode: "cors",
     }
@@ -13,8 +13,6 @@ async function getWeatherData() {
 
   showWeatherData(weatherData);
 }
-
-getWeatherData();
 
 async function showWeatherData(weatherData) {
   const conditionData = await weatherData.current.condition.text;
@@ -28,3 +26,10 @@ async function showWeatherData(weatherData) {
   icon.src = iconData;
   p.appendChild(icon);
 }
+
+let formSubmit = document.querySelector("form");
+formSubmit.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let locationValue = document.querySelector("#location").value;
+  getWeatherData(locationValue);
+});
