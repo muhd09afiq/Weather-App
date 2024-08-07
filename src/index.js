@@ -25,13 +25,18 @@ async function showWeatherData(weatherData) {
   const locationName = await weatherData.location.name;
   const locationTime = await weatherData.location.localtime;
 
+  //remove previous dataDOM
+  if (document.querySelector("p")) {
+    const p = document.querySelector("p");
+    p.remove();
+  }
   const icon = document.createElement("img");
   icon.src = iconData;
-  p.appendChild(icon);
 
   const p = document.createElement("p");
   p.textContent = `Weather in ${locationName} is ${conditionData} at local time of ${locationTime}`;
   document.body.appendChild(p);
+  p.appendChild(icon);
 }
 
 let formSubmit = document.querySelector("form");
